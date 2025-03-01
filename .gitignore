@@ -1,0 +1,23 @@
+# Ігноруємо віртуальне середовище
+venv/
+*.pyc
+__pycache__/
+
+# Конфіденційні файли
+config.py
+*.env
+
+# Логи та кеш
+*.log
+*.sqlite3
+.DS_Store
+
+# PyCharm
+.idea/
+*.iml
+
+# ОС
+Thumbs.db
+
+# Тіпа бд
+users.txt
