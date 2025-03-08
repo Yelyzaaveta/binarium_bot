@@ -6,7 +6,8 @@ def filter_important_changes(prices_data):
     important_changes = []
     for item in prices_data:
         price_change_percent = item['priceChangePercent']
-        if abs(price_change_percent) > 2:
+        print(price_change_percent)
+        if abs(price_change_percent) > 1:
             important_changes.append(item)
     return important_changes
 
@@ -16,7 +17,7 @@ def filter_important_pairs(prices_data):
     important_changes = []
     for item in prices_data:
         price_change_percent = item['priceChangePercent']
-        if abs(price_change_percent) > 2:
+        if abs(price_change_percent) > 1:
             important_changes.append(item)
     return important_changes
 

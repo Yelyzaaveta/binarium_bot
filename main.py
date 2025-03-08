@@ -58,7 +58,7 @@ def main():
                     send_telegram_message(message)
                     isimportant = False
 
-            time.sleep(350)
+            time.sleep(1200)
 
 
 if __name__ == '__main__':
