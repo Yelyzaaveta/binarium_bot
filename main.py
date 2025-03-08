@@ -24,9 +24,9 @@ def main():
                 price_change = check_price_change(symbol)
 
                 if price_change_percent > 0:
-                    directionday = "*Вверх _/*"
+                    directionday = "*Вверх /*"
                 elif price_change_percent < 0:
-                    directionday = "*Вниз \_*"
+                    directionday = "*Вниз \*"
                 else:
                     directionday = "*Без змін*"
 
@@ -34,10 +34,10 @@ def main():
                     direction = "зміна менше 2%"
                 else:
                     if price_change > 0:
-                        direction = "*Вверх _/*"
+                        direction = "*Вверх /*"
                         isimportant = True
                     elif price_change < 0:
-                        direction = "*Вниз \_*"
+                        direction = "*Вниз \*"
                         isimportant = True
 
                 message = f"""

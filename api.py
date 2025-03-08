@@ -1,8 +1,7 @@
 import requests
 from datetime import datetime
-from config import BINANCE_API_URL, BINANCE_API_URL2
-
-
+BINANCE_API_URL = "https://api.binance.com/api/v3/ticker/24hr"
+BINANCE_API_URL2 = "https://api.binance.com/api/v3/klines"
 # def get_binance_prices():  # всі пари
 #     try:
 #         response = requests.get(BINANCE_API_URL)
