@@ -1,7 +1,8 @@
 import requests
 from datetime import datetime
-BINANCE_API_URL = "https://api.binance.com/api/v3/ticker/24hr"
-BINANCE_API_URL2 = "https://api.binance.com/api/v3/klines"
+from config import BINANCE_API_URL, BINANCE_API_URL2
+
+
 # def get_binance_prices():  # всі пари
 #     try:
 #         response = requests.get(BINANCE_API_URL)
@@ -27,35 +28,35 @@ BINANCE_API_URL2 = "https://api.binance.com/api/v3/klines"
 #         print(f"Error with Binance API: {e}")
 #         return []
 
-def get_binance_prices():  # всі пари ДЛЯ ОБРОБКИ
-    try:
-        response = requests.get(BINANCE_API_URL)
-        print(response)
-        response.raise_for_status()
-        data = response.json()
-        print(data)
-        # Список бажаних символів
-        desired_symbols = ["USDCHF", "GBPJPY", "USDCAD", "EURNXD", "EURUSD", "EURGBP", "USDJPY", "NZDJPY", "AUDNZD"]
-
-        # Фільтруємо дані за бажаними парами
-        filtered_data = [
-            {
-                "symbol": item["symbol"],
-                "lastPrice": float(item["lastPrice"]),
-                "priceChangePercent": float(item["priceChangePercent"]),
-                "volume": float(item["volume"]),
-                "quoteVolume": float(item["quoteVolume"]),
-                "highPrice": float(item["highPrice"]),
-                "lowPrice": float(item["lowPrice"]),
-            }
-            for item in data if item["symbol"] in desired_symbols
-        ]
-        print(filtered_data)
-        return filtered_data
-
-    except requests.exceptions.RequestException as e:
-        print(f"Error with Binance API: {e}")
-        return []
+# def get_binance_prices():  # всі пари ДЛЯ ОБРОБКИ
+#     try:
+#         response = requests.get(BINANCE_API_URL)
+#         print(response)
+#         response.raise_for_status()
+#         data = response.json()
+#         print(data)
+#         # Список бажаних символів
+#         desired_symbols = ["USDCHF", "GBPJPY", "USDCAD", "EURNXD", "EURUSD", "EURGBP", "USDJPY", "NZDJPY", "AUDNZD"]
+#
+#         # Фільтруємо дані за бажаними парами
+#         filtered_data = [
+#             {
+#                 "symbol": item["symbol"],
+#                 "lastPrice": float(item["lastPrice"]),
+#                 "priceChangePercent": float(item["priceChangePercent"]),
+#                 "volume": float(item["volume"]),
+#                 "quoteVolume": float(item["quoteVolume"]),
+#                 "highPrice": float(item["highPrice"]),
+#                 "lowPrice": float(item["lowPrice"]),
+#             }
+#             for item in data if item["symbol"] in desired_symbols
+#         ]
+#         print(filtered_data)
+#         return filtered_data
+#
+#     except requests.exceptions.RequestException as e:
+#         print(f"Error with Binance API: {e}")
+#         return []
 
 
 def get_kline_data(symbol, interval="5m", limit=3):  # 3 свічки (по 5 хвилин кожна)
@@ -103,7 +104,7 @@ def get_binance_symbols():
         print(f"Error with Binance API: {e}")
         return []
 
-pairs = ["EURUSDT", "USDJPY", "GBPUSDT", "USDCHF", "USDCAD", "AUDUSDT"]
+pairs = ["EURUSDT", "USDTJPY", "GBPUSDT", "USDTCHF", "USDTCAD", "AUDUSDT"]
 base_url = "https://api.binance.com/api/v3/ticker/price?symbol="
 
 def get_prices():
@@ -128,17 +129,44 @@ def get_binance_prices():
 
         # Визначаємо потрібні символи у форматі Binance
         desired_symbols = {
-            "EURUSD": "EURUSDT",
-            "USDJPY": "USDTJPY",
-            "GBPUSD": "GBPUSDT",
-            "USDCHF": "USDCHF",
-            "USDCAD": "USDCAD",
-            "AUDUSD": "AUDUSDT",
-            "GBPJPY": "GBPJPY",
-            "NZDJPY": "NZDJPY",
-            "AUDNZD": "AUDNZD",
-            "EURNXD": "EURNZD",
-            "EURGBP": "EURGBP",
+            "EURUSD": "EURUSDT",  # ✅ Вірно
+            #  "USDJPY": "USDJPY",  # ✅ Вірно (Binance підтримує USDJPY напряму)
+            #  "GBPUSD": "GBPUSDT",  # ✅ Вірно
+            #  "USDCHF": "USDCHF",  # ✅ Вірно
+            #  "USDCAD": "USDCAD",  # ✅ Вірно
+            #  "AUDUSD": "AUDUSDT",  # ✅ Вірно
+            #  "GBPJPY": "GBPJPY",  # ✅ Вірно
+            #  "NZDJPY": "NZDJPY",  # ✅ Вірно
+            #"AUDNZD": "AUDNZD",  # ✅ Вірно
+            #"EURNZD": "EURNZD",  # ✅ Вірно
+            #"EURGBP": "EURGBP",  # ✅ Вірно
+            #"BTCUSDT": "BTCUSDT",  # ✅ Вірно
+            #"ETHUSDT": "ETHUSDT",  # ✅ Вірно
+            #"AUDUSDT": "AUDUSDT",  # ✅ Вірно
+            #"LTCUSDT": "LTCUSDT",  # ✅ Вірно
+            #"SOLUSDT": "SOLUSDT",  # ✅ Вірно
+            #"AUDUSDC": "AUDUSDC",  # ✅ Вірно
+            #"AUDBUSD": "AUDBUSD",  # ✅ Вірно
+            #"BTCAUD": "BTCAUD",  # ✅ Вірно
+            #"GASBTC": "GASBTC",  # ✅ Вірно
+            #"XRPUSDT": "XRPUSDT",  # ✅ Вірно
+            #"ADAUSDT": "ADAUSDT",  # ✅ Вірно
+            #"DOTUSDT": "DOTUSDT",  # ✅ Вірно
+            #"BNBUSDT": "BNBUSDT",  # ✅ Вірно
+            #"AVAXUSDT": "AVAXUSDT",  # ✅ Вірно
+            #"MATICUSDT": "MATICUSDT",  # ✅ Вірно
+            #"LINKUSDT": "LINKUSDT",  # ✅ Вірно
+            #"UNIUSDT": "UNIUSDT",  # ✅ Вірно
+            #"ETHBTC": "ETHBTC",  # ✅ Вірно
+            #"LTCBTC": "LTCBTC",  # ✅ Вірно
+            #"XRPBTC": "XRPBTC",  # ✅ Вірно
+            #"ADAETH": "ADAETH",  # ✅ Вірно
+            ##"DOGEBTC": "DOGEBTC",  # ✅ Вірно
+            #"EURUSDT": "EURUSDT",  # ✅ Вірно
+            #"GBPUSDT": "GBPUSDT",  # ✅ Вірно
+            #"AUDUSDT": "AUDUSDT",  # ✅ Вірно
+            #"USDCAD": "USDCAD",  # ✅ Вірно
+            #"USDJPY": "USDJPY",  # ✅ Вірно
         }
 
         # Фільтруємо дані за бажаними парами
@@ -161,5 +189,3 @@ def get_binance_prices():
     except requests.exceptions.RequestException as e:
         print(f"Error with Binance API: {e}")
         return []
-
-get_binance_prices()
