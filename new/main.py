@@ -14,6 +14,7 @@ def main_loop():
         current_pair = pairs[index]
         candles = get_candles([current_pair])
         print(candles)
+        
 
         # пошук пари з найблішою зміною
         result = find_most_volatile_pair(candles, threshold=0.2)
